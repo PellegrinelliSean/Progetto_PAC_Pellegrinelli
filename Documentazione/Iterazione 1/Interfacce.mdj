@@ -151,7 +151,7 @@
 											"top": 139,
 											"width": 629.7255859375,
 											"height": 13,
-											"text": "+creaAccount(email: String, password: String, lat: double, long: double, maxDist: double, libriPref: String[0..*])",
+											"text": "+creaAccount(email: String, password: String, lat: double, lon: double, maxDist: double, libriPref: String[0..*])",
 											"horizontalAlignment": 0
 										},
 										{
@@ -986,7 +986,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGF7kQyPqU0Axc="
 									},
-									"name": "long",
+									"name": "lon",
 									"type": "double"
 								},
 								{
