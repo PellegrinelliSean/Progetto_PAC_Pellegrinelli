@@ -751,7 +751,7 @@
 											"top": 199,
 											"width": 119.5771484375,
 											"height": 13,
-											"text": "+long: double",
+											"text": "+lon: double",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1048,7 +1048,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGF7k+gl9hQuEU="
 							},
-							"name": "long",
+							"name": "lon",
 							"type": "double"
 						},
 						{
