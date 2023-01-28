@@ -48,7 +48,7 @@
 											"font": "Arial;13;0",
 											"left": 85,
 											"top": 101,
-											"width": 629.7255859375,
+											"width": 675.9873046875,
 											"height": 13,
 											"text": "«interface»"
 										},
@@ -61,7 +61,7 @@
 											"font": "Arial;13;1",
 											"left": 85,
 											"top": 116,
-											"width": 629.7255859375,
+											"width": 675.9873046875,
 											"height": 13,
 											"text": "GestisciAccount"
 										},
@@ -96,7 +96,7 @@
 									"font": "Arial;13;0",
 									"left": 80,
 									"top": 96,
-									"width": 639.7255859375,
+									"width": 685.9873046875,
 									"height": 38,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGF7kA1caR8ju0="
@@ -149,9 +149,9 @@
 											"font": "Arial;13;0",
 											"left": 85,
 											"top": 139,
-											"width": 629.7255859375,
+											"width": 675.9873046875,
 											"height": 13,
-											"text": "+creaAccount(email: String, password: String, lat: double, lon: double, maxDist: double, libriPref: String[0..*])",
+											"text": "+creaAccount(email: String, password: String, lat: double, lon: double, maxDist: double, libriPref: String[0..*]): boolean",
 											"horizontalAlignment": 0
 										},
 										{
@@ -166,9 +166,9 @@
 											"font": "Arial;13;0",
 											"left": 85,
 											"top": 154,
-											"width": 629.7255859375,
+											"width": 675.9873046875,
 											"height": 13,
-											"text": "+login(email: String, password: String)",
+											"text": "+login(email: String, password: String): String",
 											"horizontalAlignment": 0
 										},
 										{
@@ -183,7 +183,7 @@
 											"font": "Arial;13;0",
 											"left": 85,
 											"top": 169,
-											"width": 629.7255859375,
+											"width": 675.9873046875,
 											"height": 13,
 											"text": "+modificaAccount()",
 											"horizontalAlignment": 0
@@ -200,7 +200,7 @@
 											"font": "Arial;13;0",
 											"left": 85,
 											"top": 184,
-											"width": 629.7255859375,
+											"width": 675.9873046875,
 											"height": 13,
 											"text": "+eliminaAccount()",
 											"horizontalAlignment": 0
@@ -209,7 +209,7 @@
 									"font": "Arial;13;0",
 									"left": 80,
 									"top": 134,
-									"width": 639.7255859375,
+									"width": 685.9873046875,
 									"height": 68
 								},
 								{
@@ -249,7 +249,7 @@
 							"containerChangeable": true,
 							"left": 80,
 							"top": 96,
-							"width": 639.7255859375,
+							"width": 685.9873046875,
 							"height": 106,
 							"showProperty": false,
 							"nameCompartment": {
@@ -1007,6 +1007,15 @@
 									"name": "libriPref",
 									"type": "String",
 									"multiplicity": "0..*"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGF+PuD18yFeZw=",
+									"_parent": {
+										"$ref": "AAAAAAGF7kQyPqU0Axc="
+									},
+									"type": "boolean",
+									"direction": "return"
 								}
 							]
 						},
@@ -1035,6 +1044,15 @@
 									},
 									"name": "password",
 									"type": "String"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGF+PtqecyCLuw=",
+									"_parent": {
+										"$ref": "AAAAAAGF7ka57qVUq6Y="
+									},
+									"type": "String",
+									"direction": "return"
 								}
 							]
 						},
