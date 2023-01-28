@@ -1,4 +1,4 @@
-package com.ourbooks.code.domain;
+package com.ourbooks.code.domain.utenti;
 
 public enum CondLibro {
 	OTTIME,

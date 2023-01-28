@@ -1,4 +1,4 @@
-package com.ourbooks.code.domain;
+package com.ourbooks.code.domain.utenti;
 
 import java.util.Date;
 import java.util.Objects;
