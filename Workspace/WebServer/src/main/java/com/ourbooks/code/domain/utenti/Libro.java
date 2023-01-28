@@ -64,9 +64,7 @@ public class Libro {
 		if (getClass() != obj.getClass())
 			return false;
 		Libro other = (Libro) obj;
-		return condizioni == other.condizioni && Objects.equals(dataPub, other.dataPub) && Objects.equals(id, other.id)
-				&& illustrato == other.illustrato && numPagine == other.numPagine
-				&& Objects.equals(titolo, other.titolo);
+		return id.equals(other.id);
 	}
 	
 	

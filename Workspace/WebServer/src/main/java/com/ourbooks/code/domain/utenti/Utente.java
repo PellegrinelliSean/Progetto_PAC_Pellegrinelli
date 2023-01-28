@@ -1,8 +1,7 @@
 package com.ourbooks.code.domain.utenti;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Objects;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Utente {
 	private final static int MAX_LIBRI_PREF = 3;
@@ -13,8 +12,8 @@ public class Utente {
 	private double lat;
 	private double lon;
 	private double maxDist;
-	private String[] libriPref;
-	private HashSet<Libro> libri;
+	private String[] libriDesiderati;
+	private List<Libro> libri;
 	
 	public Utente(String email, String password, double lat, double lon, double maxDist, String...libriPref) {
 		super();
@@ -24,10 +23,14 @@ public class Utente {
 		this.lat = lat;
 		this.lon = lon;
 		this.maxDist = maxDist;
-		this.libriPref = new String[MAX_LIBRI_PREF];
-		for (int i = 0; i < MAX_LIBRI_PREF; i++)
-			this.libriPref[i] = libriPref[i];
-		this.libri = new HashSet<Libro>();
+		
+		//Solo al massimo MAX_LIBRI_PREF libri possono essere indicati come preferiti
+		int length = libriPref.length > MAX_LIBRI_PREF ? MAX_LIBRI_PREF : libriPref.length;
+		this.libriDesiderati = new String[MAX_LIBRI_PREF];
+		for (int i = 0; i < length; i++)
+			this.libriDesiderati[i] = libriPref[i];
+		
+		this.libri = new LinkedList<Libro>();
 	}
 	
 	public String getEmail() {
@@ -75,24 +78,20 @@ public class Utente {
 	}
 	
 	public String[] getLibriPref() {
-		return libriPref;
+		return libriDesiderati;
 	}
 
 	public void setLibriPref(String[] libriPref) {
-		this.libriPref = libriPref;
+		this.libriDesiderati = libriPref;
 	}
 
-	public HashSet<Libro> getLibri() {
+	public List<Libro> getLibri() {
 		return libri;
 	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + Arrays.hashCode(libriPref);
-		result = prime * result + Objects.hash(email, id, lat, libri, lon, maxDist, password);
-		return result;
+	
+	public Libro addLibro(Libro l) {
+		this.libri.add(l);
+		return l;
 	}
 
 	@Override
@@ -104,12 +103,7 @@ public class Utente {
 		if (getClass() != obj.getClass())
 			return false;
 		Utente other = (Utente) obj;
-		return Objects.equals(email, other.email) && Objects.equals(id, other.id)
-				&& Double.doubleToLongBits(lat) == Double.doubleToLongBits(other.lat)
-				&& Objects.equals(libri, other.libri) && Arrays.equals(libriPref, other.libriPref)
-				&& Double.doubleToLongBits(lon) == Double.doubleToLongBits(other.lon)
-				&& Double.doubleToLongBits(maxDist) == Double.doubleToLongBits(other.maxDist)
-				&& Objects.equals(password, other.password);
+		return id.equals(other.id);
 	}
 	
 }
