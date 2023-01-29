@@ -7,6 +7,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 
+import com.ourbooks.code.domain.utenti.CondLibro;
+import com.ourbooks.code.domain.utenti.ServizioLibri;
+import com.ourbooks.code.domain.utenti.ServizioUtenti;
+
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class WebServerApplicationTests {
 
@@ -15,9 +19,20 @@ class WebServerApplicationTests {
 
 	@Autowired
 	private TestRestTemplate restTemplate;
+	@Autowired
+	ServizioUtenti servizioU;
+	@Autowired
+	ServizioLibri servizioL;
 	
 	@Test
-	public void temptest() throws Exception {
+	public void temptest() {
+		servizioU.creaAccount("wow.assurdo.com", "passwordprova34", 35.5, 4.6, 10000);
+		String id = servizioU.login("wow.assurdo.com", "passwordprova");
+//		servizioL.aggiungiLibro(id, "Tre Joker", 250, 2020, CondLibro.BUONE, true);
+//		servizioL.aggiungiLibro(id, "Chtulhu", 400, 2018, CondLibro.OTTIME, false);
+//		servizioU.creaAccount("sean.pellegrinelli@gmail.com", "passwordprova", 12.5, -34.6, 5, "V per Vendetta", "Kingdome Come", "The Withcer", "Java concurrency in practice");
+//		id = servizioU.login("sean.pellegrinelli@gmail.com", "passwordprova");
+//		servizioL.aggiungiLibro(id, "Il signore degli anelli", 1200, 2015, CondLibro.BUONE, false);
 	}
 
 }

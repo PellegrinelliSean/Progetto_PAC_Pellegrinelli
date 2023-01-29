@@ -1,23 +1,22 @@
 package com.ourbooks.code.domain.utenti;
 
-import java.util.Date;
 import java.util.Objects;
+import java.util.UUID;
 
 public class Libro {
-	private static int next_id = 0;
 	private String id;
 	private String titolo;
 	private int numPagine;
-	private Date dataPub;
+	private int yearPub;
 	private CondLibro condizioni;
 	private boolean illustrato;
 	
-	public Libro(String titolo, int numPagine, Date dataPub, CondLibro condizioni, boolean illustrato) {
+	public Libro(String titolo, int numPagine, int yearPub, CondLibro condizioni, boolean illustrato) {
 		super();
-		this.id = "LB" + next_id++;
+		this.id = UUID.randomUUID().toString();
 		this.titolo = titolo;
 		this.numPagine = numPagine;
-		this.dataPub = dataPub;
+		this.yearPub = yearPub;
 		this.condizioni = condizioni;
 		this.illustrato = illustrato;
 	}
@@ -42,8 +41,8 @@ public class Libro {
 		return numPagine;
 	}
 
-	public Date getDataPub() {
-		return dataPub;
+	public int getDataPub() {
+		return yearPub;
 	}
 
 	public boolean isIllustrato() {
@@ -52,7 +51,7 @@ public class Libro {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(condizioni, dataPub, id, illustrato, numPagine, titolo);
+		return Objects.hash(condizioni, yearPub, id, illustrato, numPagine, titolo);
 	}
 
 	@Override

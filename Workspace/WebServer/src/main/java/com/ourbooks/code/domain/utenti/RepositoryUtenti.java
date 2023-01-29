@@ -1,39 +1,14 @@
 package com.ourbooks.code.domain.utenti;
 
-import java.util.Collection;
-import java.util.HashMap;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 
-public class RepositoryUtenti {
-	private static RepositoryUtenti istanzaRepository;
-	private HashMap<String, Utente> listaUtenti;
+public interface RepositoryUtenti extends MongoRepository<Utente, String>{
 	
-	public RepositoryUtenti() {
-		listaUtenti = new HashMap<String, Utente>();
-	}
-	
-	public static RepositoryUtenti getIstanza() {
-		if (istanzaRepository == null)
-			istanzaRepository = new RepositoryUtenti();
-		return istanzaRepository;
-	}
-	
-	public Utente save(Utente utente) {
-		this.listaUtenti.put(utente.getId(), utente);
-		return utente;
-	}
+    @Query("{id:'?0'}")
+    Utente findItemById(String id);
+    
+    @Query("{email:'?0'}")
+    Utente findItemByEmail(String email);
 
-	public Collection<Utente> findAll() {
-		return listaUtenti.values();
-	}
-	
-	public Utente findUtenteById(String userId) {
-		return listaUtenti.get(userId);
-	}
-	
-	public Utente findUtenteByEmail(String email) {
-		for (Utente u : this.findAll())
-			if (email.equals(u.getEmail()))
-				return u;
-		return null;
-	}
 }
