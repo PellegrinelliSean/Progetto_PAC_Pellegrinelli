@@ -1,5 +1,7 @@
 package com.ourbooks.code.domain.utenti;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,4 +31,7 @@ public class ServizioUtenti {
 		return u.getId();
 	}
 	
+	public List<Utente> getAllUtenti(){
+		return repository.findAll();
+	}
 }
