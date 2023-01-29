@@ -2,11 +2,21 @@ package com.ourbooks.code.domain.utenti;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+
+@Document("useritems")
 public class Utente {
-	private final static int MAX_LIBRI_PREF = 3;
-	private static int next_id = 0;
-	private final String id;
+	@Transient
+	private final static int MAX_LIBRI_DES= 3;
+	
+	@Id
+	private String id;
+	
 	private String email;
 	private String password;
 	private double lat;
@@ -15,9 +25,9 @@ public class Utente {
 	private String[] libriDesiderati;
 	private List<Libro> libri;
 	
-	public Utente(String email, String password, double lat, double lon, double maxDist, String...libriPref) {
+	public Utente(String email, String password, double lat, double lon, double maxDist, String...libriDesiderati) {
 		super();
-		this.id = "UT" + next_id++;
+		this.id = UUID.randomUUID().toString();
 		this.email = email;
 		this.password = password;
 		this.lat = lat;
@@ -25,10 +35,10 @@ public class Utente {
 		this.maxDist = maxDist;
 		
 		//Solo al massimo MAX_LIBRI_PREF libri possono essere indicati come preferiti
-		int length = libriPref.length > MAX_LIBRI_PREF ? MAX_LIBRI_PREF : libriPref.length;
-		this.libriDesiderati = new String[MAX_LIBRI_PREF];
+		int length = libriDesiderati.length > MAX_LIBRI_DES ? MAX_LIBRI_DES : libriDesiderati.length;
+		this.libriDesiderati = new String[MAX_LIBRI_DES];
 		for (int i = 0; i < length; i++)
-			this.libriDesiderati[i] = libriPref[i];
+			this.libriDesiderati[i] = libriDesiderati[i];
 		
 		this.libri = new LinkedList<Libro>();
 	}
@@ -75,6 +85,10 @@ public class Utente {
 
 	public String getId() {
 		return id;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 	public String[] getLibriPref() {
