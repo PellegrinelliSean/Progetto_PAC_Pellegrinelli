@@ -17,6 +17,7 @@ public class ServizioUtenti {
 			return false;
 		Utente u = new Utente(email, password, lat, lon, maxDist, libriPref);
 		repository.save(u);
+		servizioGrafo.aggiungiNodo(u.getId(), lat, lon, maxDist);
 		return true;
 	}
 	

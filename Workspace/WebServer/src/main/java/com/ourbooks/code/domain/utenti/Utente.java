@@ -6,7 +6,7 @@ import java.util.List;
 public class Utente {
 	private final static int MAX_LIBRI_PREF = 3;
 	private static int next_id = 0;
-	private String id;
+	private final String id;
 	private String email;
 	private String password;
 	private double lat;
