@@ -1,5 +1,8 @@
 package com.ourbooks.code.domain.grafo;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class ServizioGrafo {
 	
 	private GrafoRaggiungibilita grafo = GrafoRaggiungibilita.getIstanza();

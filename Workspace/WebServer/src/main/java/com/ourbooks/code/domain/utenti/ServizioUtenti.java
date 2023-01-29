@@ -7,7 +7,8 @@ import com.ourbooks.code.domain.grafo.ServizioGrafo;
 
 @Service
 public class ServizioUtenti {
-	private ServizioGrafo servizioGrafo = new ServizioGrafo();
+	@Autowired
+	private ServizioGrafo servizioGrafo;
 	@Autowired
 	private RepositoryUtenti repository;
 	
@@ -17,7 +18,7 @@ public class ServizioUtenti {
 			return false;
 		Utente u = new Utente(email, password, lat, lon, maxDist, libriPref);
 		repository.save(u);
-		//servizioGrafo.aggiungiNodo(u.getId(), lat, lon, maxDist);
+		servizioGrafo.aggiungiNodo(u.getId(), lat, lon, maxDist);
 		return true;
 	}
 	

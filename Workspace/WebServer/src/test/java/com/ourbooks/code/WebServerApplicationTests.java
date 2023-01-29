@@ -26,13 +26,13 @@ class WebServerApplicationTests {
 	
 	@Test
 	public void temptest() {
-		servizioU.creaAccount("wow.assurdo.com", "passwordprova34", 35.5, 4.6, 10000);
-		String id = servizioU.login("wow.assurdo.com", "passwordprova");
-//		servizioL.aggiungiLibro(id, "Tre Joker", 250, 2020, CondLibro.BUONE, true);
-//		servizioL.aggiungiLibro(id, "Chtulhu", 400, 2018, CondLibro.OTTIME, false);
-//		servizioU.creaAccount("sean.pellegrinelli@gmail.com", "passwordprova", 12.5, -34.6, 5, "V per Vendetta", "Kingdome Come", "The Withcer", "Java concurrency in practice");
-//		id = servizioU.login("sean.pellegrinelli@gmail.com", "passwordprova");
-//		servizioL.aggiungiLibro(id, "Il signore degli anelli", 1200, 2015, CondLibro.BUONE, false);
+		servizioU.creaAccount("nico.pellenp@gmail.com", "passwordprova", 35.5, 4.6, 10, "Lo Hobbit", "V per Vendetta");
+		String id = servizioU.login("nico.pellenp@gmail.com", "passwordprova");
+		servizioL.aggiungiLibro(id, "Tre Joker", 250, 2020, CondLibro.BUONE, true);
+		servizioL.aggiungiLibro(id, "Chtulhu", 400, 2018, CondLibro.OTTIME, false);
+		servizioU.creaAccount("sean.pellegrinelli@gmail.com", "passwordprova", 12.5, -34.6, 5, "V per Vendetta", "Kingdome Come", "The Withcer", "Java concurrency in practice");
+		id = servizioU.login("sean.pellegrinelli@gmail.com", "passwordprova");
+		servizioL.aggiungiLibro(id, "Il signore degli anelli", 1200, 2015, CondLibro.BUONE, false);
 	}
 
 }
