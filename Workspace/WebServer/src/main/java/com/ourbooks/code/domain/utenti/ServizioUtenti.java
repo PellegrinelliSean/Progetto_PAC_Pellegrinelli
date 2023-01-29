@@ -24,11 +24,11 @@ public class ServizioUtenti {
 		return true;
 	}
 	
-	public String login(String email, String password) {
+	public Utente login(String email, String password) {
 		Utente u = repository.findItemByEmail(email);
 			if (u == null || !password.equals(u.getPassword()))
-				return "ERR"; //Sitazione di errore: emial nono presente o password errata
-		return u.getId();
+				return null; //Sitazione di errore: emial non presente o password errata
+		return u;
 	}
 	
 	public List<Utente> getAllUtenti(){

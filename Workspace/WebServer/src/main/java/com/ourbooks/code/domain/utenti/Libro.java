@@ -1,6 +1,5 @@
 package com.ourbooks.code.domain.utenti;
 
-import java.util.Objects;
 import java.util.UUID;
 
 public class Libro {
@@ -47,11 +46,6 @@ public class Libro {
 
 	public boolean isIllustrato() {
 		return illustrato;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(condizioni, yearPub, id, illustrato, numPagine, titolo);
 	}
 
 	@Override

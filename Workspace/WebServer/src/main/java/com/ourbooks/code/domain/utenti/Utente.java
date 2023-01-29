@@ -24,10 +24,16 @@ public class Utente {
 	private double maxDist;
 	private String[] libriDesiderati;
 	private List<Libro> libri;
+	private int nToken;
 	
-	public Utente(String email, String password, double lat, double lon, double maxDist, String...libriDesiderati) {
+	public Utente() {
 		super();
 		this.id = UUID.randomUUID().toString();
+		this.nToken = 0;
+	}
+		
+	public Utente(String email, String password, double lat, double lon, double maxDist, String...libriDesiderati) {
+		this();
 		this.email = email;
 		this.password = password;
 		this.lat = lat;
@@ -91,21 +97,33 @@ public class Utente {
 		this.id = id;
 	}
 	
-	public String[] getLibriPref() {
+	public String[] getLibriDesiderati() {
 		return libriDesiderati;
 	}
 
-	public void setLibriPref(String[] libriPref) {
-		this.libriDesiderati = libriPref;
+	public void setLibriDesiderati(String[] libriDesiderati) {
+		this.libriDesiderati = libriDesiderati;
 	}
 
 	public List<Libro> getLibri() {
 		return libri;
 	}
 	
+	public void setLibri(List<Libro> libri) {
+		this.libri = libri;
+	}
+
 	public Libro addLibro(Libro l) {
 		this.libri.add(l);
 		return l;
+	}
+
+	public int getnToken() {
+		return nToken;
+	}
+
+	public void setnToken(int nToken) {
+		this.nToken = nToken;
 	}
 
 	@Override
