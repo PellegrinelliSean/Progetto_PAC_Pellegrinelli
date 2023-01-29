@@ -804,13 +804,30 @@
 											"height": 13,
 											"text": "+libri: Libro[0..*]",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAGF/jzTXTRk69k=",
+											"_parent": {
+												"$ref": "AAAAAAGF7k+gmNhYNI0="
+											},
+											"model": {
+												"$ref": "AAAAAAGF/jzTTzRhLkM="
+											},
+											"font": "Arial;13;0",
+											"left": 77,
+											"top": 259,
+											"width": 119.5771484375,
+											"height": 13,
+											"text": "+nToken: int",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 72,
 									"top": 134,
 									"width": 129.5771484375,
-									"height": 128
+									"height": 143
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -866,7 +883,7 @@
 							"left": 72,
 							"top": 96,
 							"width": 129.5771484375,
-							"height": 166,
+							"height": 181,
 							"showProperty": false,
 							"nameCompartment": {
 								"$ref": "AAAAAAGF7k+gmNhTq7I="
@@ -1081,6 +1098,15 @@
 								"$ref": "AAAAAAGF7kaQk9eBcyA="
 							},
 							"multiplicity": "0..*"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAGF/jzTTzRhLkM=",
+							"_parent": {
+								"$ref": "AAAAAAGF7k+gl9hQuEU="
+							},
+							"name": "nToken",
+							"type": "int"
 						}
 					]
 				}

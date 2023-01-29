@@ -1194,12 +1194,12 @@
 										"$ref": "AAAAAAGF7oyt8U8U1I0="
 									},
 									"font": "Arial;13;0",
-									"left": 288,
-									"top": 279,
+									"left": 296,
+									"top": 263,
 									"width": 79.8154296875,
 									"height": 13,
-									"alpha": -5.182939461307743,
-									"distance": 49.09175083453431,
+									"alpha": -5.443541840825329,
+									"distance": 60.08327554319921,
 									"hostEdge": {
 										"$ref": "AAAAAAGF7oyt8U8X9pg="
 									},
@@ -1257,16 +1257,17 @@
 									"model": {
 										"$ref": "AAAAAAGF7oyt8U8VuDE="
 									},
-									"visible": false,
 									"font": "Arial;13;0",
-									"left": 377,
-									"top": 250,
+									"left": 278,
+									"top": 295,
+									"width": 82.71630859375,
 									"height": 13,
-									"alpha": -0.5235987755982988,
-									"distance": 30,
+									"alpha": -0.4191106990543725,
+									"distance": 103.00485425454472,
 									"hostEdge": {
 										"$ref": "AAAAAAGF7oyt8U8X9pg="
-									}
+									},
+									"text": "+SMTP/POP3"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -1734,6 +1735,7 @@
 								"_parent": {
 									"$ref": "AAAAAAGF7oyt8E8TUXQ="
 								},
+								"name": "SMTP/POP3",
 								"reference": {
 									"$ref": "AAAAAAGF7ohVfk1if7Y="
 								}
