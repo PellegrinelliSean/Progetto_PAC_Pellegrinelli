@@ -31,4 +31,8 @@ public class GrafoRaggiungibilita {
 		grafo.addEdge(vu1, vu2);
 		grafo.setEdgeWeight(vu1, vu2, dist);
 	}
+	
+	public void removeVertice(VerticeUtente vu) {
+		grafo.removeVertex(vu);
+	}
 }

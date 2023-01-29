@@ -22,12 +22,19 @@ public class ServizioGrafo {
 		}
 	}
 	
-	public void eliminaNodo() {
-
+	public void eliminaNodo(String userId) {
+		for(VerticeUtente vu : grafo.vertexSet()) {
+			if(vu.getId().equals(userId)) {
+				grafo.removeVertice(vu);
+			}
+		}
 	}
 	
-	public void modificaNodo() {
-
+	//Tutti i campi pasati, magari alcuni rimangono uguali.
+	//Il nodo esiste di sicuro
+	public void modificaNodo(String userId, double lat, double lon, double maxDist) {
+		eliminaNodo(userId);
+		aggiungiNodo(userId, lat, lon, maxDist);
 	}
 	
 	private double distanzaUtenti(VerticeUtente vu1, VerticeUtente vu2) {
