@@ -349,7 +349,7 @@
 											"top": 228,
 											"width": 195,
 											"height": 13,
-											"text": "Gestore utenti"
+											"text": "Gestore account"
 										},
 										{
 											"_type": "LabelView",
@@ -1478,7 +1478,7 @@
 											"top": 318,
 											"width": 104.0380859375,
 											"height": 13,
-											"text": "GestisciAccount"
+											"text": "GestisciUtente"
 										},
 										{
 											"_type": "LabelView",
@@ -4482,7 +4482,7 @@
 											"top": 284,
 											"width": 139,
 											"height": 13,
-											"text": "Gestore account"
+											"text": "Gestore utenti"
 										},
 										{
 											"_type": "LabelView",
@@ -7921,7 +7921,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Gestore utenti",
+					"name": "Gestore account",
 					"ownedElements": [
 						{
 							"_type": "UMLDependency",
@@ -8194,7 +8194,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "GestisciAccount"
+					"name": "GestisciUtente"
 				},
 				{
 					"_type": "UMLClass",
@@ -8385,7 +8385,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Gestore account",
+					"name": "Gestore utenti",
 					"ownedElements": [
 						{
 							"_type": "UMLDependency",
