@@ -30,9 +30,9 @@ public class ServizioGrafo {
 		for(VerticeUtente vu2 : grafo.vertexSet()) {
 			if(vu2.equals(vu)) continue;
 			dist = distanzaUtenti(vu, vu2);
-			if(vu.getMaxDist() <= dist) //il nuovo utente può consegnare libri all'i-esimo utente del ciclo
+			if(vu.getMaxDist() >= dist) //il nuovo utente può consegnare libri all'i-esimo utente del ciclo
 				grafo.addArco(vu2, vu, dist); 
-			if(vu2.getMaxDist() <= dist) //l'i-esimo utente del ciclo può consegnare libri al nuovo utene
+			if(vu2.getMaxDist() >= dist) //l'i-esimo utente del ciclo può consegnare libri al nuovo utene
 				grafo.addArco(vu, vu2, dist); 
 		}
 	}

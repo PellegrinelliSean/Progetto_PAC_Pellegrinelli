@@ -1,6 +1,4 @@
-package com.ourbooks.code.domain.utenti;
-
-import java.util.List;
+package com.ourbooks.code.domain.account;
 
 /**
  * La Classe DtoUtente.
@@ -25,9 +23,6 @@ public class DtoUtente {
 	
 	/** Il titolo dei libri desiderati. */
 	private String[] libriDesiderati;
-	
-	/** I libri disponibili per la vendita. */
-	private List<Libro> libri;
 	
 	/**
 	 * Get della email.
@@ -135,24 +130,6 @@ public class DtoUtente {
 	 */
 	public void setLibriDesiderati(String[] libriDesiderati) {
 		this.libriDesiderati = libriDesiderati;
-	}
-	
-	/**
-	 * Get dei libri disponibili per la vendita.
-	 *
-	 * @return i libri disponibili per la vendita
-	 */
-	public List<Libro> getLibri() {
-		return libri;
-	}
-	
-	/**
-	 * Se dei libri disponibili per la vendita.
-	 *
-	 * @param libri i nuovi libri disponibili per la vendita
-	 */
-	public void setLibri(List<Libro> libri) {
-		this.libri = libri;
 	}
 	
 }

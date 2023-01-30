@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import com.ourbooks.code.domain.account.ServizioUtenti;
+import com.ourbooks.code.domain.account.Utente;
 import com.ourbooks.code.domain.grafo.ServizioGrafo;
-import com.ourbooks.code.domain.utenti.ServizioUtenti;
-import com.ourbooks.code.domain.utenti.Utente;
 
 /**
  * The Class InitGrafo. Per l'inizializzazione del grafo.

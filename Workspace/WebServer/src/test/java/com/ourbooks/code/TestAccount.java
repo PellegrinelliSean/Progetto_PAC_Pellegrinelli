@@ -16,18 +16,20 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
-import com.ourbooks.code.domain.utenti.DtoUtente;
-import com.ourbooks.code.domain.utenti.ServizioUtenti;
-import com.ourbooks.code.domain.utenti.Utente;
+import com.ourbooks.code.domain.account.CondLibro;
+import com.ourbooks.code.domain.account.DtoLibro;
+import com.ourbooks.code.domain.account.DtoUtente;
+import com.ourbooks.code.domain.account.Libro;
+import com.ourbooks.code.domain.account.ServizioUtenti;
+import com.ourbooks.code.domain.account.Utente;
 
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
-class WebServerApplicationTests {
+class TestAccount {
 	
 	@Autowired
 	private TestRestTemplate restTemplate;
 	
-	//ServizioUtenti usato solo per eliminare dal database i dati inseriti nello
-	//stesso durante i test
+	//ServizioUtenti usato per eliminare dal database i dati inseriti nello stesso durante i test
 	@Autowired
 	private ServizioUtenti servizioU; 
 	
@@ -36,8 +38,8 @@ class WebServerApplicationTests {
 		String url_signup = "http://localhost:8080/signup";
 		String url_login = "http://localhost:8080/login";
 		
-		//REGISTRA UTENTE 1
-		//creazione dto utente 1
+		//REGISTRA UTENTE
+		//creazione dto utente
 		DtoUtente u_dto = new DtoUtente();
 		u_dto.setEmail("utente1@gmail.com");
 		u_dto.setPassword("psw_u1");
@@ -58,7 +60,7 @@ class WebServerApplicationTests {
 		response = restTemplate.exchange(url_signup, HttpMethod.POST, httpEntity_signup, String.class);
 		assertEquals("400 BAD_REQUEST", response.getStatusCode().toString());
 		
-		//LOGIN UTENTE 1
+		//LOGIN UTENTE
 		//creazione credenziali
 		Map<String, String> credenziali = new HashMap<String, String>();
 		credenziali.put("email", u_dto.getEmail());
@@ -69,7 +71,7 @@ class WebServerApplicationTests {
 		HttpEntity<Map<String, String>> httpEntity_login = new HttpEntity<>(credenziali, headers);
 		//invio richiesta
 		Utente u = restTemplate.postForObject(url_login, httpEntity_login, Utente.class);
-		//verifica che l'utente ritornato abbia le stesse info di u1_dto
+		//verifica che l'utente ritornato abbia le stesse info di u_dto
 		assertEquals(u_dto.getEmail(), u.getEmail());
 		assertEquals(u_dto.getPassword(), u.getPassword());
 		assertEquals(u_dto.getLat(), u.getLat(), 0);
@@ -93,8 +95,68 @@ class WebServerApplicationTests {
 		response = restTemplate.exchange(url_login, HttpMethod.POST, httpEntity_login, String.class);
 		assertEquals("400 BAD_REQUEST", response.getStatusCode().toString());
 		
-		//CANCELLO UTENTE 1
+		//CANCELLO UTENTE
 		servizioU.eliminaAccount(u.getId());
 	}
 
+	@Test
+	public void testAggiungiLibro() {
+		String url_signup = "http://localhost:8080/signup";
+		String url_login = "http://localhost:8080/login";
+		String url_libro = "http://localhost:8080/utenti/";
+		
+		//REGISTRA UTENTE
+		//creazione dto utente
+		DtoUtente u_dto = new DtoUtente();
+		u_dto.setEmail("utente2@gmail.com");
+		u_dto.setPassword("psw_u2");
+		u_dto.setLat(40.44);
+		u_dto.setLon(11.55);
+		u_dto.setMaxDist(1);
+		u_dto.setLibriDesiderati(new String[]{"It", "Shining", "I promessi sposi"});
+		//creazione richiesta http
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		HttpEntity<DtoUtente> httpEntity_signup = new HttpEntity<>(u_dto, headers);
+		//invio richiesta
+		restTemplate.exchange(url_signup, HttpMethod.POST, httpEntity_signup, String.class);
+		
+		//LOGIN UTENTE
+		//creazione credenziali
+		Map<String, String> credenziali = new HashMap<String, String>();
+		credenziali.put("email", u_dto.getEmail());
+		credenziali.put("password", u_dto.getPassword());
+		//creazione richiesta http
+		headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		HttpEntity<Map<String, String>> httpEntity_login = new HttpEntity<>(credenziali, headers);
+		//invio richiesta
+		Utente u = restTemplate.postForObject(url_login, httpEntity_login, Utente.class);
+		
+		//AGGIUNTA LIBRO
+		//creazione dto libro
+		DtoLibro l_dto = new DtoLibro();
+		l_dto.setTitolo("Il miglio verde");
+		l_dto.setNumPagine(556);
+		l_dto.setYearPub(2016);
+		l_dto.setCondizioni(CondLibro.BUONE);
+		l_dto.setIllustrato(false);
+		//creazione richiesta http
+		headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		HttpEntity<DtoLibro> httpEntity = new HttpEntity<>(l_dto, headers);
+		//invio richiesta
+		ResponseEntity<Utente> response = restTemplate.exchange(url_libro + u.getId(), HttpMethod.PUT, httpEntity, Utente.class);
+		u = response.getBody();
+		Libro l = u.getLibri().get(0);
+		//verifica che il libro inserito sia corretto
+		assertEquals(l_dto.getTitolo(), l.getTitolo());
+		assertEquals(l_dto.getNumPagine(), l.getNumPagine());
+		assertEquals(l_dto.getYearPub(), l.getYearPub());
+		assertEquals(l_dto.getCondizioni(), l.getCondizioni());
+		assertEquals(l_dto.isIllustrato(), l.isIllustrato());
+		
+		//CANCELLO UTENTE 1
+		servizioU.eliminaAccount(u.getId());
+	}
 }

@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.ourbooks.code.domain.utenti.DtoLibro;
-import com.ourbooks.code.domain.utenti.DtoUtente;
-import com.ourbooks.code.domain.utenti.ServizioLibri;
-import com.ourbooks.code.domain.utenti.ServizioUtenti;
-import com.ourbooks.code.domain.utenti.Utente;
+import com.ourbooks.code.domain.account.DtoLibro;
+import com.ourbooks.code.domain.account.DtoUtente;
+import com.ourbooks.code.domain.account.ServizioLibri;
+import com.ourbooks.code.domain.account.ServizioUtenti;
+import com.ourbooks.code.domain.account.Utente;
 
 /**
- * La Classe WebControllerUtenti. Implementa il rest controller.
+ * La Classe WebController. Implementa il rest controller.
  */
 @RestController
-public class WebControllerUtenti {
+public class WebController {
 	
 	/** Il servizio utenti. */
 	@Autowired 
@@ -65,10 +65,11 @@ public class WebControllerUtenti {
 	 *
 	 * @param dto il dto del libro
 	 * @param idUtente l'id dell'utente
+	 * @return l'utente a cui è stato aggiunto il libro
 	 */
 	@PutMapping("/utenti/{idUtente}")
-	public void addLibro(@RequestBody DtoLibro dto, @PathVariable String idUtente) {
-		servizioLibri.aggiungiLibro(idUtente, dto.getTitolo(), dto.getNumPagine(), dto.getYearPub(),
+	public Utente addLibro(@RequestBody DtoLibro dto, @PathVariable String idUtente) {
+		return servizioLibri.aggiungiLibro(idUtente, dto.getTitolo(), dto.getNumPagine(), dto.getYearPub(),
 				dto.getCondizioni(), dto.isIllustrato());
 	}
 

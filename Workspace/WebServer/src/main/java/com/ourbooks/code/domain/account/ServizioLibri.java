@@ -1,4 +1,4 @@
-package com.ourbooks.code.domain.utenti;
+package com.ourbooks.code.domain.account;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,11 +22,13 @@ public class ServizioLibri {
 	 * @param yearPub l'anno di pubblicazione
 	 * @param condizioni le condizioni
 	 * @param illustrato se e' illustrato
+	 * @return l'utente a cui è stato aggiunto il libro
 	 */
-	public void aggiungiLibro(String userId, String titolo, int numPagine, int yearPub, CondLibro condizioni, boolean illustrato) {
+	public Utente aggiungiLibro(String userId, String titolo, int numPagine, int yearPub, CondLibro condizioni, boolean illustrato) {
 		Utente u = repository.findItemById(userId);
 		u.addLibro(new Libro(titolo, numPagine, yearPub, condizioni, illustrato));
 		repository.save(u);
+		return u;
 	}
 	
 }

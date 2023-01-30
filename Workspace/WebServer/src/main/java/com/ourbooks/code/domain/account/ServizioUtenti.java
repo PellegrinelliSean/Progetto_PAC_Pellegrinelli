@@ -1,4 +1,4 @@
-package com.ourbooks.code.domain.utenti;
+package com.ourbooks.code.domain.account;
 
 import java.util.List;
 
