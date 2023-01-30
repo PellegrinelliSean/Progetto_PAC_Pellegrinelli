@@ -57,7 +57,7 @@ public class WebControllerUtenti {
 		Utente u = servizioUtenti.login(json.get("email"), json.get("password"));
 		if (u != null)
 			return u;
-		throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "E-mail o password errati");
+		throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "E-mail o password errati");
 	}
 	
 	/**
