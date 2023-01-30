@@ -2,11 +2,23 @@ package com.ourbooks.code.domain.grafo;
 
 import org.springframework.stereotype.Service;
 
+/**
+ * The Classe ServizioGrafo. Servizio rest.
+ */
 @Service
 public class ServizioGrafo {
 	
+	/** Il grafo raggiungibilita uteni. */
 	private GrafoRaggiungibilita grafo = GrafoRaggiungibilita.getIstanza();
 	
+	/**
+	 * Aggiungi nodo.
+	 *
+	 * @param userId l'id dell'utente
+	 * @param lat la latitudine
+	 * @param lon la longitudine
+	 * @param maxDist la massima distanza percorribile
+	 */
 	public void aggiungiNodo(String userId, double lat, double lon, double maxDist) {
 		VerticeUtente vu = new VerticeUtente(userId, lat, lon, maxDist);
 		
@@ -25,6 +37,11 @@ public class ServizioGrafo {
 		}
 	}
 	
+	/**
+	 * Elimina nodo.
+	 *
+	 * @param userId l'id dell'utente di cui eliminare il nodo
+	 */
 	public void eliminaNodo(String userId) {
 		for(VerticeUtente vu : grafo.vertexSet()) {
 			if(vu.getId().equals(userId)) {
@@ -33,13 +50,26 @@ public class ServizioGrafo {
 		}
 	}
 	
-	//Tutti i campi pasati, magari alcuni rimangono uguali.
-	//Il nodo esiste di sicuro
+	/**
+	 * Modifica nodo.
+	 *
+	 * @param userId l'id dell'utente
+	 * @param lat la latitudine
+	 * @param lon la longitudine
+	 * @param maxDist la massima distanza percorribile in km
+	 */
 	public void modificaNodo(String userId, double lat, double lon, double maxDist) {
 		eliminaNodo(userId);
 		aggiungiNodo(userId, lat, lon, maxDist);
 	}
 	
+	/**
+	 * Distanza tra due utenti. Metodo accessorio per il metodo aggiungiNodo
+	 *
+	 * @param vu1 il vertice del primo utente
+	 * @param vu2 il vertice del secondo utente
+	 * @return la distanza tra i due utenti
+	 */
 	private double distanzaUtenti(VerticeUtente vu1, VerticeUtente vu2) {
 		double lat1 = Math.toRadians(vu1.getLat());
 		double lon1 = Math.toRadians(vu1.getLon());

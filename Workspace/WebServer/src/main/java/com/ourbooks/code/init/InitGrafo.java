@@ -10,14 +10,25 @@ import com.ourbooks.code.domain.grafo.ServizioGrafo;
 import com.ourbooks.code.domain.utenti.ServizioUtenti;
 import com.ourbooks.code.domain.utenti.Utente;
 
+/**
+ * The Class InitGrafo. Per l'inizializzazione del grafo.
+ */
 @Component
 public class InitGrafo implements CommandLineRunner {
 	
+	/** Il servizio grafo. */
 	@Autowired
 	private ServizioGrafo servizioGrafo;
+	
+	/** Il servizio utenti. */
 	@Autowired
 	private ServizioUtenti servizioUtenti;
 	
+	/**
+	 * Run.
+	 *
+	 * @param args gli arguments
+	 */
 	public void run(String...args) {
 		List<Utente> utenti = servizioUtenti.getAllUtenti();
 		for(Utente u : utenti)
