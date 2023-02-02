@@ -2035,8 +2035,8 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -16,
-											"top": 336,
+											"left": -32,
+											"top": 352,
 											"height": 13
 										},
 										{
@@ -2046,8 +2046,8 @@
 												"$ref": "AAAAAAGF6ST9CDdvikc="
 											},
 											"font": "Arial;13;1",
-											"left": 336,
-											"top": 627.5,
+											"left": 328,
+											"top": 635.5,
 											"width": 157,
 											"height": 13,
 											"text": "Visualizza libri disponibili"
@@ -2060,8 +2060,8 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -16,
-											"top": 336,
+											"left": -32,
+											"top": 352,
 											"width": 73.67724609375,
 											"height": 13,
 											"text": "(from Model)"
@@ -2074,15 +2074,15 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -16,
-											"top": 336,
+											"left": -32,
+											"top": 352,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 331,
-									"top": 620.5,
+									"left": 323,
+									"top": 628.5,
 									"width": 167.955078125,
 									"height": 25,
 									"stereotypeLabel": {
@@ -2109,8 +2109,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -8,
-									"top": 168,
+									"left": -16,
+									"top": 176,
 									"width": 10,
 									"height": 10
 								},
@@ -2125,8 +2125,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -8,
-									"top": 168,
+									"left": -16,
+									"top": 176,
 									"width": 10,
 									"height": 10
 								},
@@ -2141,8 +2141,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -8,
-									"top": 168,
+									"left": -16,
+									"top": 176,
 									"width": 10,
 									"height": 10
 								},
@@ -2157,8 +2157,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -8,
-									"top": 168,
+									"left": -16,
+									"top": 176,
 									"width": 10,
 									"height": 10
 								},
@@ -2171,38 +2171,20 @@
 									"model": {
 										"$ref": "AAAAAAGF6ST9CDdspGE="
 									},
-									"subViews": [
-										{
-											"_type": "UMLExtensionPointView",
-											"_id": "AAAAAAGF6TE603Z8YuU=",
-											"_parent": {
-												"$ref": "AAAAAAGF6ST9CDd4HNI="
-											},
-											"model": {
-												"$ref": "AAAAAAGF6TE6vHZ57Fs="
-											},
-											"font": "Arial;13;0",
-											"left": 301,
-											"top": 655,
-											"width": 227,
-											"height": 13,
-											"text": "Scelta libro da acquistare",
-											"horizontalAlignment": 0
-										}
-									],
+									"visible": false,
 									"font": "Arial;13;0",
-									"left": 296,
-									"top": 650,
+									"left": 288,
+									"top": 658,
 									"width": 237,
-									"height": 23
+									"height": 10
 								}
 							],
 							"font": "Arial;13;0",
 							"containerChangeable": true,
-							"left": 296,
-							"top": 616,
+							"left": 288,
+							"top": 624,
 							"width": 237,
-							"height": 58,
+							"height": 35,
 							"showProperty": false,
 							"nameCompartment": {
 								"$ref": "AAAAAAGF6ST9CDdvikc="
@@ -3542,8 +3524,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 570,
-									"top": 625,
+									"left": 566,
+									"top": 624,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -3562,8 +3544,8 @@
 										"$ref": "AAAAAAGF6SrYuTj1GYI="
 									},
 									"font": "Arial;13;0",
-									"left": 544,
-									"top": 628,
+									"left": 540,
+									"top": 627,
 									"width": 55.65625,
 									"height": 13,
 									"alpha": 1.4876542673203055,
@@ -3585,8 +3567,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 569,
-									"top": 654,
+									"left": 565,
+									"top": 653,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -3604,7 +3586,7 @@
 								"$ref": "AAAAAAGF6ST9CDdu0o4="
 							},
 							"lineStyle": 1,
-							"points": "533:646;607:647",
+							"points": "525:644;607:646",
 							"showVisibility": true,
 							"showProperty": false,
 							"nameLabel": {
@@ -4722,8 +4704,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 294,
-									"top": 467,
+									"left": 295,
+									"top": 471,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -4743,8 +4725,8 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 306,
-									"top": 458,
+									"left": 307,
+									"top": 462,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -4764,8 +4746,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 271,
-									"top": 486,
+									"left": 272,
+									"top": 490,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -4785,7 +4767,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 204,
+									"left": 203,
 									"top": 356,
 									"height": 13,
 									"alpha": 0.5235987755982988,
@@ -4848,8 +4830,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 385,
-									"top": 579,
+									"left": 387,
+									"top": 587,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 30,
@@ -4868,8 +4850,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 394,
-									"top": 569,
+									"left": 396,
+									"top": 577,
 									"height": 13,
 									"alpha": -0.7853981633974483,
 									"distance": 40,
@@ -4888,8 +4870,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 366,
-									"top": 600,
+									"left": 368,
+									"top": 607,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
@@ -4938,7 +4920,7 @@
 								"$ref": "AAAAAAGF6Rgj6DTucq4="
 							},
 							"lineStyle": 1,
-							"points": "176:352;390:615",
+							"points": "176:352;392:623",
 							"showVisibility": true,
 							"showProperty": false,
 							"nameLabel": {
@@ -8030,8 +8012,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 395,
-									"top": 588,
+									"left": 391,
+									"top": 590,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -8050,8 +8032,8 @@
 										"$ref": "AAAAAAGF960Bw3TrZ6Y="
 									},
 									"font": "Arial;13;0",
-									"left": 420,
-									"top": 586,
+									"left": 416,
+									"top": 595,
 									"width": 55.65625,
 									"height": 13,
 									"alpha": -1.6596939998500537,
@@ -8073,8 +8055,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 424,
-									"top": 585,
+									"left": 420,
+									"top": 591,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -8092,7 +8074,7 @@
 								"$ref": "AAAAAAGF6ST9CDdu0o4="
 							},
 							"lineStyle": 1,
-							"points": "412:615;408:571",
+							"points": "406:623;407:571",
 							"showVisibility": true,
 							"showProperty": false,
 							"nameLabel": {
@@ -9344,16 +9326,6 @@
 							"target": {
 								"$ref": "AAAAAAGF6SUmvzecmN8="
 							}
-						}
-					],
-					"extensionPoints": [
-						{
-							"_type": "UMLExtensionPoint",
-							"_id": "AAAAAAGF6TE6vHZ57Fs=",
-							"_parent": {
-								"$ref": "AAAAAAGF6ST9CDdspGE="
-							},
-							"name": "Scelta libro da acquistare"
 						}
 					]
 				},
