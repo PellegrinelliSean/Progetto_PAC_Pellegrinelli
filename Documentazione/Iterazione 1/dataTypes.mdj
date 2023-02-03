@@ -186,7 +186,7 @@
 											"top": 184,
 											"width": 167,
 											"height": 13,
-											"text": "+dataPub: Date",
+											"text": "+yearPub: int",
 											"horizontalAlignment": 0
 										},
 										{
@@ -946,8 +946,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGF7kaQk9eBcyA="
 							},
-							"name": "dataPub",
-							"type": "Date"
+							"name": "yearPub",
+							"type": "int"
 						},
 						{
 							"_type": "UMLAttribute",
