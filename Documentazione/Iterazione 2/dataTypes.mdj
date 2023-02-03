@@ -1041,7 +1041,24 @@
 											"top": 154,
 											"width": 208.47607421875,
 											"height": 13,
-											"text": "+ripartizioneToken: Map<String, int>",
+											"text": "+utenti: List<String>",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAGGF+1QWgBbmJo=",
+											"_parent": {
+												"$ref": "AAAAAAGGEq0MlB49W98="
+											},
+											"model": {
+												"$ref": "AAAAAAGGF+1QAABY3c4="
+											},
+											"font": "Arial;13;0",
+											"left": 485,
+											"top": 169,
+											"width": 208.47607421875,
+											"height": 13,
+											"text": "+tokens: List<Integer>",
 											"horizontalAlignment": 0
 										}
 									],
@@ -1049,7 +1066,7 @@
 									"left": 480,
 									"top": 134,
 									"width": 218.47607421875,
-									"height": 38
+									"height": 53
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -1105,7 +1122,7 @@
 							"left": 480,
 							"top": 96,
 							"width": 218.47607421875,
-							"height": 76,
+							"height": 91,
 							"showProperty": false,
 							"nameCompartment": {
 								"$ref": "AAAAAAGGEq0Mkx44B0o="
@@ -1358,8 +1375,17 @@
 							"_parent": {
 								"$ref": "AAAAAAGGEq0Mkh41Ll4="
 							},
-							"name": "ripartizioneToken",
-							"type": "Map<String, int>"
+							"name": "utenti",
+							"type": "List<String>"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAGGF+1QAABY3c4=",
+							"_parent": {
+								"$ref": "AAAAAAGGEq0Mkh41Ll4="
+							},
+							"name": "tokens",
+							"type": "List<Integer>"
 						}
 					]
 				}
