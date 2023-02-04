@@ -87,8 +87,21 @@ public class WebController {
 	 * @param idUtente l'id dell'utente
 	 * @return la lista di libri acquistabili coi relativi prezzi in token
 	 */
-	@GetMapping("/libri-aquistabili/{idUtente}")
+	@GetMapping("/utenti/{idUtente}")
 	public LinkedList<SpecificheAcquisto> getLibriAcquistabili(@PathVariable String idUtente) {
 		return servizioA.getLibriAcquistabili(idUtente);
+	}
+	
+	/**
+	 * Viene finalizzata l'operazione di acquisto di un libro, rendendo persistenti le modifiche agli utenti,
+	 * ossia la modifica dei token degli utenti coinvolti e la rimozione del libro al venditore 
+	 *
+	 * @param userId l'id dell'utente acquirente
+	 * @param specifiche le specifiche dell'acquisto
+	 * @return l'utente che ha acquistato il libro
+	 */
+	@PostMapping("/utenti/{idUtente}")
+	public Utente getLibriAcquistabili(@RequestBody SpecificheAcquisto dto, @PathVariable String idUtente) {
+		return servizioA.compraLibro(idUtente, dto);
 	}
 }

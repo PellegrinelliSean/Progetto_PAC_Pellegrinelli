@@ -14,7 +14,7 @@ public class ServizioLibri {
 	private RepositoryUtenti repository;
 	
 	/**
-	 * Aggiungi libro.
+	 * Aggiunge un libro.
 	 *
 	 * @param userId l'id dell'utente
 	 * @param titolo il titolo
@@ -29,6 +29,18 @@ public class ServizioLibri {
 		u.addLibro(new Libro(titolo, numPagine, yearPub, condizioni, illustrato));
 		repository.save(u);
 		return u;
+	}
+	
+	/**
+	 * Elimina il libro con id pari a quello passato come parametro.
+	 *
+	 * @param userId l'id dell'utente
+	 * @param libroId l'id del libro da eliminare
+	 */
+	public void eliminaLibro(String userId, String libroId) {
+		Utente u = repository.findItemById(userId);
+		u.deleteLibro(libroId);
+		repository.save(u);
 	}
 	
 }
