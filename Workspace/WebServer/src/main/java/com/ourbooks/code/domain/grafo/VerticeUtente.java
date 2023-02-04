@@ -4,7 +4,6 @@ package com.ourbooks.code.domain.grafo;
  * La Classe VerticeUtente. Tipo dei vertici del grafo raggiungibilità utenti.
  */
 public class VerticeUtente {
-	
 	/** L'id. */
 	private final String id;
 	
@@ -14,8 +13,11 @@ public class VerticeUtente {
 	/** La longitudine. */
 	private double lon;
 	
-	/** The massima distanza percorribile in km. */
+	/** La massima distanza percorribile in km. */
 	private double maxDist;
+	
+	/** Il percorso dall'acquirente a questo nodo aggiornato dall'apposito algoritmo. */
+	private Percorso percorso; 
 	
 	/**
 	 * Istanzia un nuovo vertice utente.
@@ -31,6 +33,7 @@ public class VerticeUtente {
 		this.lat = lat;
 		this.lon = lon;
 		this.maxDist = maxDist;
+		this.percorso = new Percorso();
 	}
 
 	/**
@@ -97,6 +100,15 @@ public class VerticeUtente {
 	}
 	
 	/**
+	 * Get del percorso.
+	 *
+	 * @return il percorso
+	 */
+	public Percorso getPercorso() {
+		return percorso;
+	}
+	
+	/**
 	 * Equals.
 	 *
 	 * @param obj l'oggetto da confrontare
@@ -112,5 +124,14 @@ public class VerticeUtente {
 			return false;
 		VerticeUtente other = (VerticeUtente) obj;
 		return id.equals(other.id);
+	}
+	
+	/**
+	 * toString
+	 * @return l'id del VerticeUtente
+	 */
+	@Override
+	public String toString() {
+		return id;
 	}
 }

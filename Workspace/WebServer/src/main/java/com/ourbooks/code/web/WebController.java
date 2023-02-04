@@ -1,9 +1,11 @@
 package com.ourbooks.code.web;
 
+import java.util.LinkedList;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -15,7 +17,9 @@ import com.ourbooks.code.domain.account.DtoLibro;
 import com.ourbooks.code.domain.account.DtoUtente;
 import com.ourbooks.code.domain.account.ServizioLibri;
 import com.ourbooks.code.domain.account.ServizioUtenti;
+import com.ourbooks.code.domain.acquisto.ServizioAcquisto;
 import com.ourbooks.code.domain.account.Utente;
+import com.ourbooks.code.domain.acquisto.SpecificheAcquisto;
 
 /**
  * La Classe WebController. Implementa il rest controller.
@@ -30,6 +34,10 @@ public class WebController {
 	/** Il servizio libri. */
 	@Autowired 
 	private ServizioLibri servizioLibri;
+	
+	/** Il servizio acquisto. */
+	@Autowired 
+	private ServizioAcquisto servizioA;
 	
 	/**
 	 * Signup di un nuovo utente.
@@ -72,5 +80,15 @@ public class WebController {
 		return servizioLibri.aggiungiLibro(idUtente, dto.getTitolo(), dto.getNumPagine(), dto.getYearPub(),
 				dto.getCondizioni(), dto.isIllustrato());
 	}
-
+	
+	/**
+	 * Ritorna la lista di libri acquistabili dall'utente
+	 *
+	 * @param idUtente l'id dell'utente
+	 * @return la lista di libri acquistabili coi relativi prezzi in token
+	 */
+	@GetMapping("/libri-aquistabili/{idUtente}")
+	public LinkedList<SpecificheAcquisto> getLibriAcquistabili(@PathVariable String idUtente) {
+		return servizioA.getLibriAcquistabili(idUtente);
+	}
 }

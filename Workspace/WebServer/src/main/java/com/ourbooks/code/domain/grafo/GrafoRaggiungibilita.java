@@ -1,5 +1,6 @@
 package com.ourbooks.code.domain.grafo;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -38,7 +39,7 @@ public class GrafoRaggiungibilita {
 	/**
 	 * Get dei vertici del grafo
 	 *
-	 * @return the il set dei vertici del grafo
+	 * @return il set dei vertici del grafo
 	 */
 	public Set<VerticeUtente> vertexSet() {
 		return grafo.vertexSet();
@@ -86,6 +87,36 @@ public class GrafoRaggiungibilita {
 	}
 	
 	/**
+	 * Restituisce gli archi uscenti dal vertice passato.
+	 *
+	 * @param vu vertice di cui restituire gli archi uscenti
+	 * @return gli archi uscenti dal vertice passato
+	 */
+	public Set<DefaultWeightedEdge> outgoingEdgesOf(VerticeUtente vu) {
+		return grafo.outgoingEdgesOf(vu);
+	}
+	
+	/**
+	 * Restituisce il vertice in cui entra l'arco
+	 *
+	 * @param arco l'arco di cui ritornare il ertice in cui entra
+	 * @return il vertice in cui entra l'arco passato
+	 */
+	public VerticeUtente getEdgeTarget(DefaultWeightedEdge arco) {
+		return grafo.getEdgeTarget(arco);
+	}
+	
+	/**
+	 * Restituisce il peso dell'arco
+	 *
+	 * @param arco l'arco di cui ritornare il peso
+	 * @return il peso dell'arco passato
+	 */
+	public double getEdgeWeight(DefaultWeightedEdge arco) {
+		return grafo.getEdgeWeight(arco);
+	}
+	
+	/**
 	 * Verifica l'esistenza di un arco tra due vertici.
 	 *
 	 * @param vu1 il vertice da cui parte l'arco
@@ -95,5 +126,13 @@ public class GrafoRaggiungibilita {
 	public double verificaArco(VerticeUtente vu1, VerticeUtente vu2) {
 		return grafo.containsEdge(vu1, vu2) ? grafo.getEdgeWeight(grafo.getEdge(vu1, vu2)) : -1;
 	}
-
+	
+	/**
+	 * Resetta il grafo
+	 */
+	public void svuotaGrafo() {
+		Set<VerticeUtente> vertici = new HashSet<VerticeUtente>();
+		vertici.addAll(grafo.vertexSet());
+		grafo.removeAllVertices(vertici);
+	}
 }
