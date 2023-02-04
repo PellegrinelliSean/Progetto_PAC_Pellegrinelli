@@ -3,6 +3,7 @@ package com.ourbooks.code;
 import org.junit.jupiter.api.Test;
 import static org.junit.Assert.*;
 
+import java.util.LinkedList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,6 +18,8 @@ import com.ourbooks.code.domain.account.DtoUtente;
 import com.ourbooks.code.domain.account.ServizioUtenti;
 import com.ourbooks.code.domain.account.Utente;
 import com.ourbooks.code.domain.grafo.GrafoRaggiungibilita;
+import com.ourbooks.code.domain.grafo.Percorso;
+import com.ourbooks.code.domain.grafo.ServizioGrafo;
 import com.ourbooks.code.domain.grafo.VerticeUtente;
 
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
@@ -28,6 +31,9 @@ class TestGrafo {
 	//ServizioUtenti usato per eliminare dal database i dati inseriti nello stesso durante i test
 	@Autowired
 	private ServizioUtenti servizioU; 
+	
+	@Autowired
+	private ServizioGrafo servizioG; 
 	
 	@Test
 	public void testGrafoRaggiungibilità() {
@@ -113,5 +119,88 @@ class TestGrafo {
 		servizioU.eliminaAccount(u1.getId());
 		servizioU.eliminaAccount(u2.getId());
 		servizioU.eliminaAccount(u3.getId());
+	}
+	
+	@Test
+	void testDijkstra() {
+		/*
+		 * I nodi vengono creati direttamente tramite il ServizioGrafo
+		 * (non attraverso la registrazione di un utente tramite richiesta Rest,
+		 * caso testato nel metodo testGrafoRaggiungibilità) così da poter impostare
+		 * gli id e rendere più semplice la verifica
+		 */
+		//Creazione dei nodi
+		servizioG.svuotaGrafo(); //elimino tutti i nodi del grafo così che non interferiscano col test
+		servizioG.aggiungiNodo("1", 0, 0, 0);
+		servizioG.aggiungiNodo("2", 0.1, 0, 12);
+		servizioG.aggiungiNodo("3", 0.1, 0.1, 12);
+		servizioG.aggiungiNodo("4", 0, 0.6, 57);
+		servizioG.aggiungiNodo("5", -0.4, 0.3, 57);
+		servizioG.aggiungiNodo("6", 0, 0.7, 12);
+		/*
+		 * Il grafo così creato ha i seguenti archi
+		 * [1->2, 1->5, 2->3, 3->2, 3->4, 5->4, 4->5, 4->6, 6->4]
+		 */
+		
+		//ottengo i percorsi minimi dal nodo 1
+		LinkedList<Percorso> percorsi = servizioG.getPercorsiMinimi("1");
+		
+		//creo i quattro percorsi che mi aspetto di trovare e verifico che siano
+		//contenuti nella lista "percorsi"
+		Percorso p = new Percorso();
+		LinkedList<String> nodi;
+		LinkedList<Double> distanze;
+		//Percorso da 1 a 2
+		nodi = new LinkedList<String>();
+		nodi.addFirst("2");
+		distanze = new LinkedList<Double>();
+		distanze.add(11.1);
+		p.setNodi(nodi);
+		p.setDistanze(distanze);
+		p.setDist_totale(11.1);
+		p.setPassi(1);
+		assertTrue(percorsi.contains(p));
+		
+		//Percorso da 1 a 3
+		nodi = new LinkedList<String>();
+		nodi.addFirst("2");
+		nodi.addFirst("3");
+		distanze = new LinkedList<Double>();
+		distanze.addFirst(11.1);
+		distanze.addFirst(11.1);
+		p.setNodi(nodi);
+		p.setDistanze(distanze);
+		p.setDist_totale(22.2);
+		p.setPassi(2);
+		assertTrue(percorsi.contains(p));
+		
+		//Percorso da 1 a 4
+		nodi = new LinkedList<String>();
+		nodi.addFirst("2");
+		nodi.addFirst("3");
+		nodi.addFirst("4");
+		distanze = new LinkedList<Double>();
+		distanze.addFirst(11.0);
+		distanze.addFirst(11.0);
+		distanze.addFirst(56.7);
+		p.setNodi(nodi);
+		p.setDistanze(distanze);
+		p.setDist_totale(78.7);
+		p.setPassi(3);
+		assertTrue(percorsi.contains(p));
+		
+		//Percorso da 1 a 5
+		nodi = new LinkedList<String>();
+		nodi.addFirst("5");
+		distanze = new LinkedList<Double>();
+		distanze.add(55.6);
+		p.setNodi(nodi);
+		p.setDistanze(distanze);
+		p.setDist_totale(55.6);
+		p.setPassi(1);
+		assertTrue(percorsi.contains(p));
+		
+		//Verifico che non ci siano altri percorsi oltre a questi 4
+		assertEquals(4, percorsi.size());
 	}
 }
