@@ -634,7 +634,7 @@
 											"top": 354,
 											"width": 556.0166015625,
 											"height": 13,
-											"text": "+compraLibro(userIdCompratore: String, specifiche: SpecificheAcquisto)",
+											"text": "+compraLibro(userIdCompratore: String, specifiche: SpecificheAcquisto): Utente",
 											"horizontalAlignment": 0
 										}
 									],
@@ -1228,6 +1228,15 @@
 									},
 									"name": "specifiche",
 									"type": "SpecificheAcquisto"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGGHMIU5/JJbhk=",
+									"_parent": {
+										"$ref": "AAAAAAGF7knXRKWBRnU="
+									},
+									"type": "Utente",
+									"direction": "return"
 								}
 							]
 						}

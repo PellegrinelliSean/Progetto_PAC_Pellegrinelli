@@ -18,9 +18,7 @@ import com.ourbooks.code.domain.account.Libro;
 import com.ourbooks.code.domain.account.ServizioLibri;
 import com.ourbooks.code.domain.account.ServizioUtenti;
 import com.ourbooks.code.domain.account.Utente;
-import com.ourbooks.code.domain.acquisto.ServizioAcquisto;
 import com.ourbooks.code.domain.acquisto.SpecificheAcquisto;
-import com.ourbooks.code.domain.grafo.Percorso;
 import com.ourbooks.code.domain.grafo.ServizioGrafo;
 
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
@@ -66,7 +64,7 @@ class TestAcquisto {
 		u3 = servizioL.aggiungiLibro(u3.getId(), "Il Signore degli Anelli", 3000, 2018, CondLibro.OTTIME, true);
 		
 		//RICHIESTA REST
-		String url = "http://localhost:8080/libri-aquistabili/";
+		String url = "http://localhost:8080/utenti/";
 		ResponseEntity<LinkedList<SpecificheAcquisto>> response = restTemplate.exchange(url + u1.getId(),
 		                    HttpMethod.GET, null, new ParameterizedTypeReference<LinkedList<SpecificheAcquisto>>(){});
 		LinkedList<SpecificheAcquisto> listaLibri = response.getBody();
@@ -81,17 +79,43 @@ class TestAcquisto {
 		utenti = new LinkedList<String>();
 		utenti.addFirst(u2.getId());
 		tokens = new LinkedList<Integer>();
-		tokens.addFirst(960 + 434); //960 per il libro, 434 per il trasporto
+		/*
+		 * costo libro: 800 * 0.8 * (1 + (50 - (2023 -2023)) / 100 = 960
+		 * costo trasporto: 100 + 11.1 * 20 = 322
+		 */
+		tokens.addFirst(960 + 322);
 		sa = new SpecificheAcquisto(l, utenti, tokens);
-		//assertTrue(listaLibri.contains(sa));
+		assertTrue(listaLibri.contains(sa));
 		//secondo libro utente 2
 		l = u2.getLibri().get(1); //"Shining"
 		utenti = new LinkedList<String>();
 		utenti.addFirst(u2.getId());
 		tokens = new LinkedList<Integer>();
-		tokens.addFirst(724 + 434); //960 per il libro, 434 per il trasporto
+		/*
+		 * costo libro: 1140 * 0.5 * (1 + (50 - (2023 -2000)) / 100 = 724
+		 * costo trasporto: 100 + 11.1 * 20 = 322
+		 */
+		tokens.addFirst(724 + 322);
 		sa = new SpecificheAcquisto(l, utenti, tokens);
-		//assertTrue(listaLibri.contains(sa));
+		assertTrue(listaLibri.contains(sa));
+		//libro utente 3
+		l = u3.getLibri().get(0); //"Il Signore degli Anelli"
+		utenti = new LinkedList<String>();
+		utenti.addFirst(u2.getId());
+		utenti.addFirst(u3.getId());
+		tokens = new LinkedList<Integer>();
+		/*
+		 * costo libro: (3000 + 500) * 1.5 * (1 + (50 - (2023 -2018)) / 100 = 7613
+		 * costo trasporto acquirente: 100 + 16.68 * 20 = 434
+		 * costo trasporto intermediario: 100 + 11.1 * 20 = 322
+		 */
+		tokens.addFirst(322);
+		tokens.addFirst(7613 + 434);
+		sa = new SpecificheAcquisto(l, utenti, tokens);
+		assertTrue(listaLibri.contains(sa));
+		
+		//Verifico che non ci siano altri libri disponibili oltre a questi 3
+		assertEquals(3, listaLibri.size());
 		
 		//CANCELLO GLI UTENTI DAL DATABASE
 		servizioU.eliminaAccount(u1.getId());
