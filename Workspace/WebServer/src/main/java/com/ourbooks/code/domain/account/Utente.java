@@ -230,12 +230,24 @@ public class Utente {
 	/**
 	 * Aggiunta di un libro tra quelli disponibili per la vendita.
 	 *
-	 * @param l il libro
+	 * @param l il libro da aggiungere
 	 * @return il libro
 	 */
 	public Libro addLibro(Libro l) {
 		this.libri.add(l);
 		return l;
+	}
+	
+	
+	/**
+	 * Rimozione di un libro da quelli disponibili per la vendita.
+	 *
+	 * @param libroId l'id del libro da rimuovere
+	 */
+	public void deleteLibro(String libroId) {
+		for (Libro l : this.libri)
+			if(l.getId().equals(libroId))
+				this.libri.remove(l);
 	}
 
 	/**
