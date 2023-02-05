@@ -78,7 +78,7 @@ class TestAccount {
 		assertEquals(u_dto.getLon(), u.getLon(), 0);
 		assertEquals(u_dto.getMaxDist(), u.getMaxDist(), 0);
 		assertArrayEquals(new String[]{u_dto.getLibriDesiderati()[0], u_dto.getLibriDesiderati()[1], null}, u.getLibriDesiderati());
-		assertEquals(0, u.getnToken());
+		assertEquals(1000, u.getnToken());
 		
 		//LOGIN UTENTE 1 CREDENZIALI ERRATE
 		credenziali = new HashMap<String, String>();

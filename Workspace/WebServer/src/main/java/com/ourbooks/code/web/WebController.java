@@ -96,12 +96,15 @@ public class WebController {
 	 * Viene finalizzata l'operazione di acquisto di un libro, rendendo persistenti le modifiche agli utenti,
 	 * ossia la modifica dei token degli utenti coinvolti e la rimozione del libro al venditore 
 	 *
-	 * @param userId l'id dell'utente acquirente
-	 * @param specifiche le specifiche dell'acquisto
+	 * @param idUtente l'id dell'utente acquirente
+	 * @param dto le specifiche dell'acquisto
 	 * @return l'utente che ha acquistato il libro
 	 */
 	@PostMapping("/utenti/{idUtente}")
 	public Utente compraLibro(@RequestBody SpecificheAcquisto dto, @PathVariable String idUtente) {
-		return servizioA.compraLibro(idUtente, dto);
+		Utente u = servizioA.compraLibro(idUtente, dto);
+		if (u != null)
+			return u;
+		throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Token insufficienti");
 	}
 }

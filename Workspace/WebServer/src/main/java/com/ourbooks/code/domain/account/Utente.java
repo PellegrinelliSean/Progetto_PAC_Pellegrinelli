@@ -1,5 +1,6 @@
 package com.ourbooks.code.domain.account;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -17,7 +18,7 @@ public class Utente {
 	
 	/** La Costante MAX_LIBRI_DES: indica il massimo numero di libri desiderati. */
 	@Transient
-	private final static int MAX_LIBRI_DES= 3;
+	private final static int MAX_LIBRI_DES = 3;
 	
 	/** L'id. */
 	@Id
@@ -46,15 +47,6 @@ public class Utente {
 	
 	/** Il numero di token. */
 	private int nToken;
-	
-	/**
-	 * Istanzia un nuovo utente.
-	 */
-	public Utente() {
-		super();
-		this.id = UUID.randomUUID().toString();
-		this.nToken = 0;
-	}
 		
 	/**
 	 * Istanzia un nuovo utente.
@@ -67,7 +59,9 @@ public class Utente {
 	 * @param libriDesiderati il titolo dei libri desiderati
 	 */
 	public Utente(String email, String password, double lat, double lon, double maxDist, String...libriDesiderati) {
-		this();
+		super();
+		this.id = UUID.randomUUID().toString();
+		this.nToken = 1000; //token gratuiti per creazione account
 		this.email = email;
 		this.password = password;
 		this.lat = lat;
@@ -245,9 +239,12 @@ public class Utente {
 	 * @param libroId l'id del libro da rimuovere
 	 */
 	public void deleteLibro(String libroId) {
-		for (Libro l : this.libri)
-			if(l.getId().equals(libroId))
-				this.libri.remove(l);
+		Iterator<Libro> i = this.libri.iterator();
+		while(i.hasNext()) {
+			if(i.next().getId().equals(libroId)) {
+				i.remove();
+			}
+		}
 	}
 
 	/**

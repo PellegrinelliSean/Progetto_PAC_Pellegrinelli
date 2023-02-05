@@ -136,10 +136,10 @@ public class ServizioAcquisto {
 		for (int i = specifiche.getUtenti().size() - 1; i >= 0; i--) {
 			idUtente = specifiche.getUtenti().get(i);
 			u = repository.findItemById(idUtente);
-			if (i == 0)
-				servizioL.eliminaLibro(idUtente, specifiche.getLibro().getId());
 			u.setnToken(u.getnToken() + specifiche.getTokens().get(i));
 			repository.save(u);
+			if (i == 0)
+				servizioL.eliminaLibro(idUtente, specifiche.getLibro().getId());
 			
 			//invio email
 			message = new SimpleMailMessage(); 
@@ -147,15 +147,15 @@ public class ServizioAcquisto {
 	        message.setTo(u.getEmail()); 
 	        message.setSubject("Consegna libro OurBooks");
 	        if(i == 0)
-	        	text = "Ciao! Hanno acquistato un tuo libro! devi consegnarlo a ";
+	        	text = "Ciao! Hanno acquistato il tuo libro \"" + specifiche.getLibro().getTitolo() + "\"! devi consegnarlo a ";
 	        else
-	        	text = "Ciao! Sei stato scelto per consegnare un libro a ";
-	        text += u_ricevitore.getEmail() + " il libro " + specifiche.getLibro().getTitolo() + "\n";
-	        text += "Riceverai " + specifiche.getTokens().get(i) + " token\n";
+	        	text = "Ciao! Sei stato scelto per consegnare il libro \"" + specifiche.getLibro().getTitolo() + "\" a ";
+	        text += u_ricevitore.getEmail() + ".\n";
+	        text += "Riceverai " + specifiche.getTokens().get(i) + " token.\n";
 	        text += "L'utente si trova alle seguenti coordinate:\n";
 	        text += "latitudine: " + u_ricevitore.getLat() + "\n";
 	        text += "longitudine: " + u_ricevitore.getLon() + "\n";
-	        text += "Contatti direttamente l'utente per accordarsi su data e orario della consegna.";
+	        text += "Contatta direttamente l'utente per accordarti su data e orario della consegna.";
 	        message.setText(text);
 	        emailSender.send(message);
 	        

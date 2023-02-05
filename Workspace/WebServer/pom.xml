@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.ourbooks</groupId>
 	<artifactId>WebServer</artifactId>
-	<version>0.1</version>
+	<version>0.2</version>
 	<name>WebServer</name>
 	<description>Web server progetto PAC</description>
 	<properties>

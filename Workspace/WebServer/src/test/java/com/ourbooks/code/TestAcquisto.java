@@ -10,7 +10,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
 import com.ourbooks.code.domain.account.CondLibro;
@@ -116,6 +119,68 @@ class TestAcquisto {
 		
 		//Verifico che non ci siano altri libri disponibili oltre a questi 3
 		assertEquals(3, listaLibri.size());
+		
+		//CANCELLO GLI UTENTI DAL DATABASE
+		servizioU.eliminaAccount(u1.getId());
+		servizioU.eliminaAccount(u2.getId());
+		servizioU.eliminaAccount(u3.getId());
+	}
+	
+	@Test
+	public void testAcquistoLibro() {
+		//svuoto il grafo di raggiungibilità
+		servizioG.svuotaGrafo();
+		
+		//REGISTRA 3 UTENTI
+		servizioU.creaAccount("emailfittizia.acquirente@gmail.com", "psw1", 0.0, 0.0, 0);
+		servizioU.creaAccount("nico.pellenp@gmail.com", "psw2", 0.1, 0.0, 12);//circa 11.1km da u1
+		servizioU.creaAccount("sean.pellegrinelli@gmail.com", "psw3", 0.1, 0.15, 17);//circa 16.68km da u2
+		
+		//OTTENGO I TRE UTENTI (direttamente attraveso servizioU, senza richiesta rest)
+		Utente u1 = servizioU.login("emailfittizia.acquirente@gmail.com", "psw1");
+		Utente u2 = servizioU.login("nico.pellenp@gmail.com", "psw2");
+		Utente u3 = servizioU.login("sean.pellegrinelli@gmail.com", "psw3");
+		
+		//AGGIUNTA LIBRI UTENTE 2
+		u2 = servizioL.aggiungiLibro(u2.getId(), "Dune", 1000, 2020, CondLibro.BUONE, false);
+		u2 = servizioL.aggiungiLibro(u2.getId(), "Il Signore degli Anelli", 3000, 2018, CondLibro.OTTIME, true);
+		//AGGIUNTA LIBRI UTENTE 3
+		u3 = servizioL.aggiungiLibro(u3.getId(), "Se Questo è un Uomo", 100, 1980, CondLibro.PESSIME, false);
+		
+		//RICHIESTA REST LISTA LIBRI
+		String url = "http://localhost:8080/utenti/";
+		ResponseEntity<LinkedList<SpecificheAcquisto>> response = restTemplate.exchange(url + u1.getId(),
+		                    HttpMethod.GET, null, new ParameterizedTypeReference<LinkedList<SpecificheAcquisto>>(){});
+		LinkedList<SpecificheAcquisto> listaLibri = response.getBody();
+		
+		//SCELTA LIBRO DA ACQUISTARE
+		SpecificheAcquisto libroScelto = listaLibri.get(2); //"Se Questo è un Uomo"
+		
+		//RICHIESTA REST ACQUISTO LIBRO
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		HttpEntity<SpecificheAcquisto> httpEntity = new HttpEntity<>(libroScelto, headers);
+		u1 = restTemplate.postForObject(url + u1.getId(), httpEntity, Utente.class);
+
+		//RIOTTENGO I DUE UTENTI CHE OTTENGONO TOKEN
+		u2 = servizioU.login("nico.pellenp@gmail.com", "psw2");
+		u3 = servizioU.login("sean.pellegrinelli@gmail.com", "psw3");
+
+		//VERIFICA MODIFICHE
+		assertEquals(1000 - libroScelto.getTokens().get(0) - libroScelto.getTokens().get(1), u1.getnToken());
+		assertEquals(1000 + libroScelto.getTokens().get(1), u2.getnToken());
+		assertEquals(1000 + libroScelto.getTokens().get(0), u3.getnToken());
+		assertFalse(u3.getLibri().contains(libroScelto.getLibro()));
+		
+		//SCELTA LIBRO DA ACQUISTARE TOKEN INSUFFICIENTI
+		libroScelto = listaLibri.get(1); //"Il Signore degli Anelli"
+		
+		//RICHIESTA REST ACQUISTO LIBRO
+		headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		httpEntity = new HttpEntity<>(libroScelto, headers);
+		ResponseEntity<String> response_err = restTemplate.exchange(url + u1.getId(), HttpMethod.POST, httpEntity, String.class);
+		assertEquals("400 BAD_REQUEST", response_err.getStatusCode().toString());
 		
 		//CANCELLO GLI UTENTI DAL DATABASE
 		servizioU.eliminaAccount(u1.getId());

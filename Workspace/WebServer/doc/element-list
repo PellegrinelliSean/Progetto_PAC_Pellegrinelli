@@ -1,5 +1,6 @@
 com.ourbooks.code
+com.ourbooks.code.domain.account
+com.ourbooks.code.domain.acquisto
 com.ourbooks.code.domain.grafo
-com.ourbooks.code.domain.utenti
 com.ourbooks.code.init
 com.ourbooks.code.web
