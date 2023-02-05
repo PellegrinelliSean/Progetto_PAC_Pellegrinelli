@@ -4,6 +4,8 @@ import java.time.Year;
 import java.util.LinkedList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.ourbooks.code.domain.account.Libro;
@@ -30,6 +32,10 @@ public class ServizioAcquisto {
 	/** La repository degli utenti. */
 	@Autowired
 	private RepositoryUtenti repository;
+	
+	/** L'oggetto per l'ivio della email. */
+	@Autowired
+    private JavaMailSender emailSender;
 	
 	/**
 	 * Metodo che restituisce tutti i libri acquistabili da un utente ed il relativo costo in token,
@@ -124,13 +130,36 @@ public class ServizioAcquisto {
 		//Si ottengono gli utenti da pagare, si aggiungono i token dovuti e al primo si toglie anche il libro
 		Utente u;
 		String idUtente;
-		for (int i = 0; i < specifiche.getUtenti().size(); i++) {
+		Utente u_ricevitore = compratore;
+		SimpleMailMessage message;
+		String text;
+		for (int i = specifiche.getUtenti().size() - 1; i >= 0; i--) {
 			idUtente = specifiche.getUtenti().get(i);
 			u = repository.findItemById(idUtente);
 			if (i == 0)
 				servizioL.eliminaLibro(idUtente, specifiche.getLibro().getId());
 			u.setnToken(u.getnToken() + specifiche.getTokens().get(i));
 			repository.save(u);
+			
+			//invio email
+			message = new SimpleMailMessage(); 
+	        message.setFrom("ourbooks.pellegrinelli@gmail.com");
+	        message.setTo(u.getEmail()); 
+	        message.setSubject("Consegna libro OurBooks");
+	        if(i == 0)
+	        	text = "Ciao! Hanno acquistato un tuo libro! devi consegnarlo a ";
+	        else
+	        	text = "Ciao! Sei stato scelto per consegnare un libro a ";
+	        text += u_ricevitore.getEmail() + " il libro " + specifiche.getLibro().getTitolo() + "\n";
+	        text += "Riceverai " + specifiche.getTokens().get(i) + " token\n";
+	        text += "L'utente si trova alle seguenti coordinate:\n";
+	        text += "latitudine: " + u_ricevitore.getLat() + "\n";
+	        text += "longitudine: " + u_ricevitore.getLon() + "\n";
+	        text += "Contatti direttamente l'utente per accordarsi su data e orario della consegna.";
+	        message.setText(text);
+	        emailSender.send(message);
+	        
+	        u_ricevitore = u;
 		}
 		return compratore;
 	}
