@@ -101,7 +101,7 @@ public class WebController {
 	 * @return l'utente che ha acquistato il libro
 	 */
 	@PostMapping("/utenti/{idUtente}")
-	public Utente getLibriAcquistabili(@RequestBody SpecificheAcquisto dto, @PathVariable String idUtente) {
+	public Utente compraLibro(@RequestBody SpecificheAcquisto dto, @PathVariable String idUtente) {
 		return servizioA.compraLibro(idUtente, dto);
 	}
 }
